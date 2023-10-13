@@ -1,0 +1,25 @@
+.hero {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    flex-wrap: wrap;  
+}
+
+.title h1{
+    font-family:  cursive;
+    font-size: 10vmin;
+    font-weight: 100;
+    margin: 0 30px;
+}
+
+.title h2{
+    font-size: 3vmin;
+    text-align: center;
+    font-weight: 100;
+    padding: 20px;
+}
+
+.logo img{
+    width: 40vmin;
+}
