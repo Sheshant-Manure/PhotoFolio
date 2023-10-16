@@ -1,0 +1,84 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+.uploadbox {
+    border: 3px dashed crimson;
+    width: 30%;
+    height: 150px;
+    margin: 30px;
+}
+
+.uploadbox {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.uploadbox h2 {
+    border: 1px solid crimson;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 4px;
+}
+
+.uploadbox h2:hover {
+    cursor: pointer;
+}
+
+p {
+    font-size: 12px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.container button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    background-color: crimson;
+    color: white;
+}
+
+.container button:hover {
+    cursor: pointer;
+}
+
+.albumform {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid crimson;
+    padding: 20px;
+    height: 150px;
+    width: 30%;
+}
+
+.albumform input {
+    margin-bottom: 5px;
+    padding: 10px;
+    border: 1px solid crimson;
+}
+
+.albumform input::placeholder {
+    color:crimson ;
+    text-align: center;
+}
+
+/* .albumform button {
+    background-color: crimson;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+} */

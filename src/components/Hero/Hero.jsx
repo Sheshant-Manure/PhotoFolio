@@ -11,6 +11,11 @@ const Hero = () => {
         <div className={style.logo}>
             <img src={logo} alt="Logo" />
         </div>
+        <div className={style.quote}>
+          <h1>CREATE ALBUMS.</h1>
+          <h1>ADD PICTURES.</h1>
+          <h1>MANAGE WITH PHOTOFOLIO TOOLKIT.</h1>
+        </div>
     </div>
   )
 }

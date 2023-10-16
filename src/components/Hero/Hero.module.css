@@ -6,20 +6,32 @@
     flex-wrap: wrap;  
 }
 
-.title h1{
+.title h1 {
     font-family:  cursive;
     font-size: 10vmin;
     font-weight: 100;
     margin: 0 30px;
 }
 
-.title h2{
+.title h2 {
     font-size: 3vmin;
     text-align: center;
     font-weight: 100;
     padding: 20px;
+    color: crimson;
 }
 
-.logo img{
+.logo img {
     width: 40vmin;
+}
+
+.quote {
+    width: 60%;
+}
+
+.quote h1{
+    color: crimson;
+    font-weight: bolder;   
+    font-size: 35x;
+    text-align: right;
 }
