@@ -3,6 +3,8 @@ import { storage } from '../../Config/firebaseInit';
 import { getDownloadURL, listAll, ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
 import AlbumsList from '../AlbumsList/AlbumsList';
+import { collection, addDoc } from "firebase/firestore";
+import { db } from '../../Config/firebaseInit';
 import style from './Upload.module.css'
 
 const Upload = () => {
@@ -10,6 +12,14 @@ const Upload = () => {
   // Defining the state for image file that is to be uploaded
   const [imageFile, setImageFile] = useState(null);
   const [imagesList, setImagesList] = useState([]);
+  const [albumname, setAlbumname] = useState('');
+
+  const addNewDoc = async () => {
+    await addDoc(collection(db, "albumslist"), {
+      name: albumname
+    });
+    console.log(albumname);
+  }
 
   const imageListRef = ref(storage, 'images/');
   useEffect(()=>{
@@ -17,9 +27,10 @@ const Upload = () => {
       response.items.forEach((item)=>
       getDownloadURL(item).then((url)=>{
         setImagesList([...imagesList, url])
+        console.log(url);
       }))
     });
-  },[imagesList, imageListRef]);
+  },[]);
 
   // Function to handle uploading of image to firebase storage
   const uploadImageFile = () => {
@@ -32,8 +43,8 @@ const Upload = () => {
     <>
     <div className={style.container}>
         <div className={style.albumform}>
-          <input type='text' placeholder='Album Name' />
-          <button type='submit'><h3>Create Album</h3></button>
+          <input type='text' onChange={(e)=>setAlbumname(e.target.value)} placeholder='Album Name' />
+          <button onClick={addNewDoc}><h3>Create Album</h3></button>
         </div>
         <div className={style.uploadbox}>
             <label>

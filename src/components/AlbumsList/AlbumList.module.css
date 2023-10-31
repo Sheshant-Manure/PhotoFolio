@@ -1,0 +1,26 @@
+.heading {
+    text-align: center;
+}
+
+.albumslist {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 10%;
+    gap: 10px;
+    max-width: 80%; 
+}
+
+.albumslist h1 {
+    color: crimson;
+    border: 3px solid crimson;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.albumslist h1:hover {
+    background-color: crimson;
+    color: white;
+    cursor: pointer;
+}
