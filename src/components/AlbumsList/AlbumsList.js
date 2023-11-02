@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../../Config/firebaseInit';
 import style from './AlbumList.module.css'
-import Images from '../Images';
+import Images from '../Images/Images';
 
 const AlbumsList = (props) => {
    
