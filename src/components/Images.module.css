@@ -1,0 +1,16 @@
+.images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.images img {
+    width: 50vmin;
+    margin: 20px;
+}
+
+.images img:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}

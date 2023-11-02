@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { storage } from '../../Config/firebaseInit';
-import { getDownloadURL, listAll, ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
 import AlbumsList from '../AlbumsList/AlbumsList';
 import { collection, addDoc } from "firebase/firestore";
@@ -11,8 +11,8 @@ const Upload = () => {
 
   // Defining the state for image file that is to be uploaded
   const [imageFile, setImageFile] = useState(null);
-  const [imagesList, setImagesList] = useState([]);
   const [albumname, setAlbumname] = useState('');
+  const [activeAlbum, setActiveAlbum] = useState("images");
 
   const addNewDoc = async () => {
     await addDoc(collection(db, "albumslist"), {
@@ -21,21 +21,10 @@ const Upload = () => {
     console.log(albumname);
   }
 
-  const imageListRef = ref(storage, 'images/');
-  useEffect(()=>{
-    listAll(imageListRef).then((response)=>{
-      response.items.forEach((item)=>
-      getDownloadURL(item).then((url)=>{
-        setImagesList([...imagesList, url])
-        console.log(url);
-      }))
-    });
-  },[]);
-
   // Function to handle uploading of image to firebase storage
   const uploadImageFile = () => {
     if(imageFile === null) return;
-    const imageFileRef =  ref(storage, `images/${imageFile.name + v4()}`);
+    const imageFileRef =  ref(storage, `${activeAlbum}/${imageFile.name + v4()}`);
     uploadBytes(imageFileRef, imageFile).then(()=>alert('Image Uploaded Successfully!'));
   }
 
@@ -55,7 +44,7 @@ const Upload = () => {
             <button onClick={uploadImageFile}><h3>Add To Album</h3></button>
         </div>
     </div>
-    <AlbumsList />
+    <AlbumsList activeAlbum = { activeAlbum } setActiveAlbum = { setActiveAlbum } />
     </>
   )
 }

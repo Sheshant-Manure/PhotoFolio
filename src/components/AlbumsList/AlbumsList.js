@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../../Config/firebaseInit';
 import style from './AlbumList.module.css'
+import Images from '../Images';
 
 const AlbumsList = (props) => {
    
   const [albums, setAlbums] = useState([]);
-
+  const { activeAlbum, setActiveAlbum } = props;
 
   useEffect(() => {
     const getAllAlbums = async () => {
       const querySnapshot = await getDocs(collection(db, "albumslist"));
+      let allAlbums = [];
       querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-        setAlbums(prevArray => [...prevArray, doc.data()]);
+        allAlbums.push(doc.data());
       });
+      setAlbums(allAlbums);
     }
     getAllAlbums();
   }, []);
@@ -26,12 +28,12 @@ const AlbumsList = (props) => {
       { 
         albums && albums.map((album, i) => {
           return (
-            <h1 key={i}>{album.name}</h1>
+            <h1 onClick={()=>{setActiveAlbum(album.name)}} key={i}>{album.name}</h1>
           );
         })
       }
     </div>
-
+    <Images activeAlbum = { activeAlbum } />
     </>
   );
 }
