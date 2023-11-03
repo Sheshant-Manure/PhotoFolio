@@ -1,22 +1,21 @@
 import style from './Images.module.css';
 import { useState, useEffect } from 'react';
-import { getDownloadURL, listAll, ref } from 'firebase/storage';
+import { getDownloadURL, listAll, ref, deleteObject } from 'firebase/storage';
 import { storage } from '../../Config/firebaseInit';
 import Modal from './Modal';
 
 const Images = (props) => {
-
-  const [imagesURL, setimagesURL] = useState([]);
+  const [imagesURL, setImagesURL] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const { activeAlbum } = props;
 
   useEffect(() => {
-    setimagesURL([]);
+    setImagesURL([]);
     const URLsRef = ref(storage, `${activeAlbum}/`);
     listAll(URLsRef).then((response) => {
       response.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
-            setimagesURL((prev)=>[...prev, url]);
+          setImagesURL((prev) => [...prev, { url, item }]);
         });
       });
     });
@@ -26,23 +25,40 @@ const Images = (props) => {
     setSelectedImage(null);
   };
 
-  useEffect(()=>{
-    console.log(selectedImage);
-  }, [selectedImage]);
+  const handleDelete = (item) => {
+    deleteObject(item)
+      .then(() => {
+        setImagesURL((prev) => prev.filter((image) => image.item !== item));
+      })
+      .catch((error) => {
+        console.error('Error deleting image:', error);
+      });
+  };
 
   return (
     <>
-    <div className={style.images}>
-      { imagesURL.length > 0 ? imagesURL.map((imgUrl, index) => {
-        return (<img key={index} src={imgUrl} alt={imgUrl} onClick={() => setSelectedImage(imgUrl)} />)
-        }) : <h1>Loading {activeAlbum} ...</h1> 
-      }
-    </div>
-    {
-      selectedImage ? <Modal imageURL={selectedImage} closeModal={closeImageModal}/> : null
-    }
+      <div className={style.images}>
+        {imagesURL.length > 0 ? (
+          imagesURL.map((image, index) => (
+            <div key={index} className={style.imageContainer}>
+              <img src={image.url} alt={image.url} onClick={() => setSelectedImage(image.url)} />
+              <button
+                className={style.deleteButton}
+                onClick={() => handleDelete(image.item)}
+              >
+                Delete
+              </button>
+            </div>
+          ))
+        ) : (
+          <h1>Loading {activeAlbum} ...</h1>
+        )}
+      </div>
+      {selectedImage ? (
+        <Modal imageURL={selectedImage} closeModal={closeImageModal} />
+      ) : null}
     </>
-  )
-}
+  );
+};
 
 export default Images;

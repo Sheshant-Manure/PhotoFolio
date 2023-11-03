@@ -1,16 +1,39 @@
+/* Images.module.css */
 .images {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-}
-
-.images img {
-    width: 50vmin;
+  }
+  
+  .images .imageContainer {
+    position: relative;
     margin: 20px;
-}
-
-.images img:hover {
+  }
+  
+  .images img {
+    width: 50vmin;
+  }
+  
+  .images img:hover {
     cursor: pointer;
     opacity: 0.5;
-}
+  }
+  
+  .images .deleteButton {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .images .imageContainer:hover .deleteButton {
+    display: block;
+  }
+  
