@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/PhotoFolio/static/css/main.6132ce10.css",
+    "main.js": "/PhotoFolio/static/js/main.3dd1dd06.js",
+    "static/media/picture.png": "/PhotoFolio/static/media/picture.71af6d24a85e4ba7e9a8.png",
+    "index.html": "/PhotoFolio/index.html",
+    "main.6132ce10.css.map": "/PhotoFolio/static/css/main.6132ce10.css.map",
+    "main.3dd1dd06.js.map": "/PhotoFolio/static/js/main.3dd1dd06.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6132ce10.css",
+    "static/js/main.3dd1dd06.js"
+  ]
+}
